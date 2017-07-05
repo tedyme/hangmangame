@@ -98,7 +98,11 @@ $(document).ready(function () {
     }
     if (wordArray.allValuesSame()) {
       this.guessesLeft = 0;
-
+      appendScoreRecord({
+        wordGuessed: this.word,
+        gameWon: true,   
+        guessesLeft: 0
+      });
       $('.word').html("Congratulations! You guessed the right word, "+this.word.toUpperCase() + ". To play again, please select a new category.");
 
     }
@@ -111,10 +115,46 @@ $(document).ready(function () {
       hangmanDrawer(this.guessesLeft);
     };
     if(!this.guessesLeft) {
+      appendScoreRecord({
+        wordGuessed: this.word,
+        gameWon: false,   
+        guessesLeft: this.guessesLeft
+      });
       $('.word').html("Game over! The word was "+this.word.toUpperCase()+". To play again, please select a new category.");
     }
 
     return false;
+  }
+
+  function appendScoreRecord(data) {
+    // interface data {
+    //   wordGuessed: '',
+    //   gameWon: '',
+    //   player: '',   
+    //   guessesLeft: ''
+    // }
+    if (uid) {
+      data.player = uid;
+
+      $.ajax({
+        url : "/score",
+        type: "POST",
+        data: JSON.stringify(
+          data
+        ),
+        contentType: "application/json; charset=utf-8",
+        dataType   : "json",
+        success    : function () {
+          console.log('data saved');
+        },
+        error: function (xhr, text, exception) {
+          alert('An ERROR occured! ' + text);
+        }
+      });
+    } else {
+      alert('No valid uID found');
+    }
+
   }
 
 

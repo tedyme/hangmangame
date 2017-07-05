@@ -1,13 +1,11 @@
-<!doctype html>
-<html>
-<head>
-  <title>Hangman</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-  <link href="assets/dependencies/main.css" rel="stylesheet">
 
-</head>
-<body>
+<% if (!req.session.uid) { %>
+  <script>
+    alert('You need to log in to access this page');
+    document.location.href = '/';
 
+  </script>
+<%} else {%>
   <div class="introOverlay">
 
        <div class="card">
@@ -35,6 +33,5 @@
     <script src="assets/js/dependencies/main.js"></script>
     <script src="assets/js/dependencies/proto.js"></script>
     <script src="assets/js/dependencies/draw.js"></script>
+<%}%>
 
-</body>
-</html>

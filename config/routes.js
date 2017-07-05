@@ -33,9 +33,13 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-       view: '/user/new'
-
-     }
+     view: 'user/new'
+   },
+   '/homepage': {
+    view: 'homepage'
+   },
+   'GET /stats': 'ScoreController.printScores',
+   'POST /login': 'UserController.login'
 
 
 

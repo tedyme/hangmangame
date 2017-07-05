@@ -1,0 +1,27 @@
+<% if (!req.session.uid) { %>
+  <script>
+    alert('You need to log in to access this page');
+    document.location.href = '/';
+
+  </script>
+<%} else {
+  if (data) {
+    for(let i in data ) {
+      %>
+      <b>Word To Guess:</b> <%=data[i]['wordGuessed']%><br/>
+      <b>Guesses left:</b> <%=data[i]['guessesLeft']%><br/>
+      <b>Won:</b> <%-(data[i]['gameWon']) ? '<span style="color:green">Yes</span>':'<span style="color:red">No</span>'%><br/><br/><br/>
+      <%
+      
+    }
+  }
+  if (err) {
+     %>
+      <%=err %>
+      <%
+  }
+  
+%>
+  
+<%}%>
+

@@ -45,6 +45,7 @@ $.get('/csrfToken', function(r) {
                     { 'X-CSRF-TOKEN': r._csrf }
                 });
         });
+var uid = '<%=req.session.uid%>';
 </script>
     <%- body %>
 

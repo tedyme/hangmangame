@@ -25,18 +25,25 @@
           var password = $("#loginPassword").val();
           if (username && password) {
               $.ajax({
-                      url : "/user",
-                      type: "POST",
-                      data: JSON.stringify(
-                          {username: username, password:password},
-
-                      ),
-                      contentType: "application/json; charset=utf-8",
-                      dataType   : "json",
-                      success    : function () {
-                                  window.location = "/homepage";
-                          }
-                  });
+                url : "/login",
+                type: "POST",
+                data: JSON.stringify(
+                  {username: username, password:password},
+                ),
+                contentType: "application/json; charset=utf-8",
+                dataType   : "json",
+                success    : function (r) {
+                debugger;
+                  if (r && r.id) {
+                    window.location = "/homepage";
+                  } else {
+                    alert('Login failed: ' + r.error);
+                  }
+                },
+                error: function (xhr, text, exception) {
+                  alert('An ERROR occured! ' + text);
+                }
+            });
 
           } else {
               alert("A username and password is required");
@@ -50,18 +57,21 @@
           if (username && password) {
               if (password === confirmPassword) {
               $.ajax({
-                                    url : "/user",
-                                    type: "POST",
-                                    data: JSON.stringify(
-                                        {username: username, password:password},
+                url : "/user",
+                type: "POST",
+                data: JSON.stringify(
+                    {username: username, password:password},
 
-                                    ),
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType   : "json",
-                                    success    : function () {
-                                                window.location = "/homepage";
-                                        }
-                                });
+                ),
+                contentType: "application/json; charset=utf-8",
+                dataType   : "json",
+                success    : function () {
+                  window.location = "/homepage";
+                },
+                error: function (xhr, text, exception) {
+                  alert('An ERROR occured! ' + text);
+                }
+              });
 
               } else {
                   alert("Passwords don't match");

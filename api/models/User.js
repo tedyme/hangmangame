@@ -8,20 +8,19 @@
 module.exports = {
 
   attributes: {
-
-        username: {
-                  type: 'string',
-                  required: true
-              },
-       password: {
-           type: 'string'
-       },
-       wins: {
-           type: 'integer'
-       }
+    id: {
+      type: 'number',
+      primary: true,
+      autoIncrement: true
+    },
+    username: {
+      type: 'string',
+      required: true,
+      unique: true
+    },
+   password: {
+     type: 'string',
+     required: true
+   }
   }
 };
-GET /score?where=user.id=x
-if(gameWon == true){
-   this.wins++
-}
