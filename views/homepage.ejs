@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <title>Hangman</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <link href="assets/dependencies/main.css" rel="stylesheet">
+
+</head>
+<body>
+
+  <div class="introOverlay">
+
+       <div class="card">
+         <h1>HANGMAN</h1>
+         <div class="playCircle"><div class="triangle"></div></div>
+       </div>
+     </div>
+  <div class="content">
+    <h1>HANGMAN IN JS</h1>
+    <div class="category">
+    <select id="chooseCategory">
+      <option value="animals">Animals</option>
+      <option value="chores">Chores</option>
+      <option value="countries">Countries</option>
+      <option value="sports">Sports</option>
+      <option value="companies">Companies</option>
+    </select>
+    </div>
+    <div class="lettersForGuessing"></div>
+    <div class="word"></div>
+
+    <canvas id="hangman" width="200" height="200">Your browser is not supported.</canvas>
+  </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="assets/js/dependencies/main.js"></script>
+    <script src="assets/js/dependencies/proto.js"></script>
+    <script src="assets/js/dependencies/draw.js"></script>
+
+</body>
+</html>

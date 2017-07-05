@@ -1,0 +1,75 @@
+<form action="user" method="POST" class="form-login" id="regForm">
+  <h2 class="form-signin-heading">Create an account</h2>
+
+  <input type="text" class="form-control" id="signupName" placeholder="your name" name="name">
+  <input type="password" class="form-control" id="signupPassword" placeholder="password" name="password">
+  <input type="password" class="form-control" id="signupConfirmPassword" placeholder="password confirmation" name="confirmation">
+  <br />
+  <button class="form-control btn btn-lg btn-primary " type="submit" id="signupButton">Create account</button>
+
+  </form>
+
+  <form action="user" method="POST" id="loginForm" class="form-login">
+  <h2 class="form-sigin-heading">Log in</h2>
+    <input type="text" class="form-control" id="loginName" placeholder="your name" name="name">
+    <input type="password" class="form-control" id="loginPassword" placeholder="password" name="password">
+    <br />
+    <button class="form-control btn btn-lg btn-primary " id="loginButton">Log in</button>
+  </form>
+  <script>
+
+      $(document).ready(function(){
+      $("#loginForm").submit(function(e){
+          e.preventDefault();
+          var username = $("#loginName").val();
+          var password = $("#loginPassword").val();
+          if (username && password) {
+              $.ajax({
+                      url : "/user",
+                      type: "POST",
+                      data: JSON.stringify(
+                          {username: username, password:password},
+
+                      ),
+                      contentType: "application/json; charset=utf-8",
+                      dataType   : "json",
+                      success    : function () {
+                                  window.location = "/homepage";
+                          }
+                  });
+
+          } else {
+              alert("A username and password is required");
+          }
+      });
+      $("#regForm").submit(function(e){
+          var username = $("#signupName").val();
+          var password = $("#signupPassword").val();
+          var confirmPassword = $("#signupConfirmPassword").val();
+          e.preventDefault();
+          if (username && password) {
+              if (password === confirmPassword) {
+              $.ajax({
+                                    url : "/user",
+                                    type: "POST",
+                                    data: JSON.stringify(
+                                        {username: username, password:password},
+
+                                    ),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType   : "json",
+                                    success    : function () {
+                                                window.location = "/homepage";
+                                        }
+                                });
+
+              } else {
+                  alert("Passwords don't match");
+              }
+          } else {
+              alert("A username and password is required");
+          }
+      });
+      });
+  </script>
+
